@@ -169,16 +169,5 @@
     </div>
 </div>
 
-<div class="faq-container">
-    <div class="faq-title">FAQ Populer</div>
-    <div class="faq-item">
-        <span>Bagaimana cara melakukan reservasi?</span>
-        <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i>
-    </div>
-    <div class="faq-item">
-        <span>Metode pembayaran apa saja yang tersedia?</span>
-        <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i>
-    </div>
-</div>
 
 @endsection
