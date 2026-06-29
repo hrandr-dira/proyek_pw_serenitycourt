@@ -163,7 +163,25 @@
     @forelse($lapangan as $l)
         <div class="court-card-horizontal">
             <div class="court-image">
-                <img src="{{ $l->foto ? asset(ltrim($l->foto, '/')) : 'https://images.unsplash.com/photo-1518605368461-1ee71abed5de?q=80&w=600&auto=format&fit=crop' }}" alt="{{ $l->nama }}">
+                {{-- LOGIKA GAMBAR OTOMATIS BERGANTI BERDASARKAN NAMA LAPANGAN --}}
+                @if(str_contains(strtolower($l->nama), 'futsal a'))
+                    <img src="{{ asset('images/futsalA.jpg') }}" alt="{{ $l->nama }}">
+                @elseif(str_contains(strtolower($l->nama), 'futsal b'))
+                    <img src="{{ asset('images/futsalB.jpg') }}" alt="{{ $l->nama }}">
+                    
+                @elseif(str_contains(strtolower($l->nama), 'badminton a'))
+                    <img src="{{ asset('images/badmintonA.jpg') }}" alt="{{ $l->nama }}">
+                @elseif(str_contains(strtolower($l->nama), 'badminton b'))
+                    <img src="{{ asset('images/badmintonB.jpg') }}" alt="{{ $l->nama }}">
+                    
+                @elseif(str_contains(strtolower($l->nama), 'basket a'))
+                    <img src="{{ asset('images/basketA.jpg') }}" alt="{{ $l->nama }}">
+                @elseif(str_contains(strtolower($l->nama), 'basket b'))
+                    <img src="{{ asset('images/basketB.jpg') }}" alt="{{ $l->nama }}">
+                @else
+                    {{-- Gambar fallback default jika nama database tidak mengandung kata di atas --}}
+                    <img src="{{ asset('images/futsalA.jpg') }}" alt="{{ $l->nama }}">
+                @endif
             </div>
             <div class="court-content">
                 <div class="court-name">{{ $l->nama }}</div>
@@ -176,6 +194,8 @@
                         <div><i class="fa-solid fa-users"></i> 5 vs 5</div>
                     @elseif($l->jenis === 'badminton')
                         <div><i class="fa-solid fa-users"></i> 2 vs 2</div>
+                    @elseif($l->jenis === 'basket')
+                        <div><i class="fa-solid fa-users"></i> 5 vs 5</div>
                     @endif
                 </div>
                 <div class="court-footer">

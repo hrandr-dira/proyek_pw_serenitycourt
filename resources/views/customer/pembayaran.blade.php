@@ -167,7 +167,25 @@
 <div class="section-heading">Ringkasan Reservasi</div>
 <div class="summary-card">
     <div class="summary-img">
-        <img src="{{ $reservasi->lapangan->foto ?? 'https://images.unsplash.com/photo-1518605368461-1ee71abed5de?q=80&w=400&auto=format&fit=crop' }}" alt="Court">
+        {{-- LOGIKA BARU: GAMBAR DISESUAIKAN DENGAN LAPANGAN YANG DI-BOOKING --}}
+        @if(str_contains(strtolower($reservasi->lapangan->nama), 'futsal a'))
+            <img src="{{ asset('images/futsalA.jpg') }}" alt="{{ $reservasi->lapangan->nama }}">
+        @elseif(str_contains(strtolower($reservasi->lapangan->nama), 'futsal b'))
+            <img src="{{ asset('images/futsalB.jpg') }}" alt="{{ $reservasi->lapangan->nama }}">
+            
+        @elseif(str_contains(strtolower($reservasi->lapangan->nama), 'badminton a'))
+            <img src="{{ asset('images/badmintonA.jpg') }}" alt="{{ $reservasi->lapangan->nama }}">
+        @elseif(str_contains(strtolower($reservasi->lapangan->nama), 'badminton b'))
+            <img src="{{ asset('images/badmintonB.jpg') }}" alt="{{ $reservasi->lapangan->nama }}">
+            
+        @elseif(str_contains(strtolower($reservasi->lapangan->nama), 'basket a'))
+            <img src="{{ asset('images/basketA.jpg') }}" alt="{{ $reservasi->lapangan->nama }}">
+        @elseif(str_contains(strtolower($reservasi->lapangan->nama), 'basket b'))
+            <img src="{{ asset('images/basketB.jpg') }}" alt="{{ $reservasi->lapangan->nama }}">
+        @else
+            {{-- Default Fallback Gambar --}}
+            <img src="{{ asset('images/futsalA.jpg') }}" alt="{{ $reservasi->lapangan->nama }}">
+        @endif
     </div>
     <div class="summary-details">
         <div class="summary-title">{{ $reservasi->lapangan->nama }}</div>
@@ -185,7 +203,6 @@
     @csrf
     <div class="section-heading">Metode Pembayaran</div>
     <div class="payment-methods">
-        <!-- Option 1 -->
         <label class="payment-option active" id="opt-transfer">
             <input type="radio" name="payment_method" value="transfer" style="display:none;" checked>
             <div class="payment-label">
@@ -194,7 +211,6 @@
             <div class="check-circle"><i class="fa-solid fa-check"></i></div>
         </label>
 
-        <!-- Option 2 -->
         <label class="payment-option" id="opt-ewallet">
             <input type="radio" name="payment_method" value="ewallet" style="display:none;">
             <div class="payment-label">
@@ -203,7 +219,6 @@
             <div class="check-circle"><i class="fa-solid fa-check"></i></div>
         </label>
 
-        <!-- Option 3 -->
         <label class="payment-option" id="opt-cash">
             <input type="radio" name="payment_method" value="cash" style="display:none;">
             <div class="payment-label">
@@ -226,11 +241,8 @@
     const options = document.querySelectorAll('.payment-option');
     options.forEach(opt => {
         opt.addEventListener('click', function() {
-            // Remove active from all
             options.forEach(o => o.classList.remove('active'));
-            // Add active to clicked
             this.classList.add('active');
-            // Check the radio input
             this.querySelector('input').checked = true;
         });
     });
