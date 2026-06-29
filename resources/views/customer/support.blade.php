@@ -134,7 +134,6 @@
 <h2 class="page-subtitle">Pilih cara menghubungi kami</h2>
 
 <div class="contact-cards">
-    <!-- WhatsApp Card -->
     <div class="contact-card">
         <div class="contact-header">
             <div class="contact-icon">
@@ -147,12 +146,11 @@
         </div>
         <div class="contact-divider"></div>
         <div class="contact-info">
-            <i class="fa-solid fa-phone" style="transform: scaleX(-1);"></i> +62 85234876456
+            <i class="fa-solid fa-phone" style="transform: scaleX(-1);"></i> +62 81958394502
         </div>
-        <a href="#" class="btn-contact">Chat WhatsApp</a>
+        <a href="https://wa.me/6281958394502?text=Halo%20Admin%20Serenity%20Court,%20saya%20butuh%20bantuan." target="_blank" class="btn-contact">Chat WhatsApp</a>
     </div>
 
-    <!-- Email Card -->
     <div class="contact-card">
         <div class="contact-header">
             <div class="contact-icon">
@@ -165,22 +163,11 @@
         </div>
         <div class="contact-divider"></div>
         <div class="contact-info">
-            Email: serenitycourt@gmail.com
+            Email: serenitycourt123@gmail.com
         </div>
-        <a href="#" class="btn-contact">Kirim Email</a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=serenitycourt123@gmail.com&su=Tanya%20Seputar%20Serenity%20Court&body=Halo%20Admin%20Serenity%20Court," target="_blank" class="btn-contact">Kirim Email</a>
     </div>
 </div>
 
-<div class="faq-container">
-    <div class="faq-title">FAQ Populer</div>
-    <div class="faq-item">
-        <span>Bagaimana cara melakukan reservasi?</span>
-        <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i>
-    </div>
-    <div class="faq-item">
-        <span>Metode pembayaran apa saja yang tersedia?</span>
-        <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i>
-    </div>
-</div>
 
 @endsection

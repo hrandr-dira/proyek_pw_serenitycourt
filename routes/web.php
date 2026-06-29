@@ -3,11 +3,18 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Customer\DashboardController as CustomerDashboard;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 // ─── Public Routes ────────────────────────────────────────────────────────────
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check()) {
+        return Auth::user()->isAdmin()
+            ? redirect()->route('admin.dashboard')
+            : redirect()->route('customer.dashboard');
+    }
+
+    return redirect()->route('login');
 })->name('home');
 
 // ─── Auth Routes ──────────────────────────────────────────────────────────────

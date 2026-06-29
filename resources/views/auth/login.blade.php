@@ -74,24 +74,43 @@
             position: relative;
             margin-bottom: 15px;
         }
-        .input-group i {
+        .input-group i.fa-lock, .input-group i.fa-envelope {
             position: absolute;
             left: 15px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-muted);
+            pointer-events: none; /* Supaya tidak mengganggu klik input */
         }
         .input-with-icon {
             width: 100%;
-            padding: 12px 15px 12px 40px;
+            padding: 12px 45px 12px 40px; /* Jarak kanan ditambah (45px) agar teks password tidak tertumpuk tombol mata */
             border: 1px solid var(--border-color);
             border-radius: 6px;
             font-family: var(--font-main);
             font-size: 14px;
             outline: none;
+            box-sizing: border-box;
         }
         .input-with-icon:focus {
             border-color: var(--secondary-blue);
+        }
+
+        /* Styling baru untuk tombol mata */
+        .toggle-password-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0;
+            z-index: 10;
+        }
+        .toggle-password-btn:hover {
+            color: var(--primary-blue);
         }
 
         .forgot-password {
@@ -207,7 +226,6 @@
 <body>
     <div class="login-left">
         <div class="logo-wrap">
-            <!-- TEMPAT UPLOAD GAMBAR: Simpan logo dengan nama "logo.png" di dalam folder "public/images/" -->
             <img src="{{ asset('images/logo.png') }}" alt="Serenity Court Logo" style="height:45px; width:auto; border-radius: 8px;">
             <div style="font-size: 14px; text-align: left; line-height: 1.1;">SERENITY<br>COURT</div>
         </div>
@@ -231,7 +249,10 @@
 
             <div class="input-group" style="margin-bottom:0;">
                 <i class="fa-solid fa-lock"></i>
-                <input type="password" name="password" class="input-with-icon" placeholder="Password" required>
+                <input type="password" id="password" name="password" class="input-with-icon" placeholder="Password" required>
+                <button type="button" id="toggle-password" class="toggle-password-btn" aria-label="Tampilkan password">
+                    <i class="fa-regular fa-eye"></i>
+                </button>
             </div>
 
             <div class="forgot-password">
@@ -268,6 +289,7 @@
     <div class="login-right"></div>
 
     <script>
+        // Logika Selector Role Card (Bawaan)
         const cardCustomer = document.getElementById('card-customer');
         const cardAdmin = document.getElementById('card-admin');
         const radioCustomer = cardCustomer.querySelector('input');
@@ -284,6 +306,27 @@
             cardCustomer.classList.remove('active');
             radioAdmin.checked = true;
         });
+
+        // LOGIKA BARU: Show/Hide Password
+        const togglePasswordBtn = document.getElementById('toggle-password');
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = togglePasswordBtn.querySelector('i');
+
+        togglePasswordBtn.addEventListener('click', function () {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                // Ganti ikon menjadi mata dicoret
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+                this.setAttribute('aria-label', 'Sembunyikan password');
+            } else {
+                passwordInput.type = 'password';
+                // Kembalikan ke ikon mata biasa
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+                this.setAttribute('aria-label', 'Tampilkan password');
+            }
+        });
     </script>
 </body>
-</html>
+</html>   
